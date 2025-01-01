@@ -1,11 +1,3 @@
-// Task Manager JavaScript
-
-// Select DOM elements
-const taskInput = document.getElementById("taskInput");
-const addTaskBtn = document.getElementById("addTaskBtn");
-const taskList = document.getElementById("taskList");
-
-// Function to add a new task
 function addTask() {
     const taskText = taskInput.value.trim();
     
@@ -14,62 +6,34 @@ function addTask() {
         return;
     }
     
-    // Create a new list item
+    // Create a new list item (task)
     const newTask = document.createElement("li");
-    newTask.textContent = taskText;
+    
+    // Create a span element to hold the task text
+    const taskContent = document.createElement("span");
+    taskContent.textContent = taskText;
+    
+    // Create a remove button
+    const removeBtn = document.createElement("button");
+    removeBtn.textContent = "Remove";
+    removeBtn.classList.add("remove-btn");  // Optional: add a class for styling
 
-    // Append the task to the list
+    // Add click event to the remove button to delete the task
+    removeBtn.addEventListener("click", function() {
+        taskList.removeChild(newTask);  // Remove task when button is clicked
+    });
+
+    // Append the task text and remove button to the new task
+    newTask.appendChild(taskContent);
+    newTask.appendChild(removeBtn);
+
+    // Append the new task to the task list
     taskList.appendChild(newTask);
 
-    // Clear the input field
+    // Clear the input field after task is added
     taskInput.value = "";
+    taskInput.focus();  // Focus back to input for ease of adding more tasks
 }
-// Fixed JavaScript: Clear the input after adding a task
-// function addTask() {
-//     const taskText = taskInput.value.trim();
-    
-//     if (taskText === "") {
-//         alert("Please enter a task!");
-//         return;
-//     }
-    
-//     // Create a new list item
-//     const newTask = document.createElement("li");
-//     newTask.textContent = taskText;
-
-//     // Append the task to the list
-//     taskList.appendChild(newTask);
-
-//     // Clear the input field after task is added
-//     taskInput.value = "";  // Reset the input field
-
-//     // Focus back to input for ease of adding more tasks
-//     taskInput.focus();
-// }
-// function addTask() {
-//     const taskText = taskInput.value.trim();
-    
-//     if (taskText === "") {
-//         alert("Please enter a task!");
-//         return;
-//     }
-    
-//     // Create a new list item
-//     const newTask = document.createElement("li");
-//     newTask.textContent = taskText;
-
-//     // Add click event to remove the task
-//     newTask.addEventListener("click", function() {
-//         taskList.removeChild(newTask);  // Remove task when clicked
-//     });
-
-//     // Append the task to the list
-//     taskList.appendChild(newTask);
-
-//     // Clear the input field after task is added
-//     taskInput.value = "";
-//     taskInput.focus();  // Focus back to input for ease of adding more tasks
-// }
 
 // Event listener for the "Add Task" button
 addTaskBtn.addEventListener("click", addTask);
